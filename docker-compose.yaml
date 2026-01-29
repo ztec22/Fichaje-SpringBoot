@@ -1,0 +1,23 @@
+services:
+  mongo:
+    image: mongo:8.0
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./src/main/resources/db/migration/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/?authSource=admin
+      ME_CONFIG_BASICAUTH_ENABLED: true
+      ME_CONFIG_BASICAUTH_USERNAME: express
+      ME_CONFIG_BASICAUTH_PASSWORD: express
+
