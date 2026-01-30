@@ -14,7 +14,7 @@ db.createUser({
 
 db.clock_in_types.insertMany(
     [
-        {"description":"Enter to Work","io":true},
+        {"description":"Start Work","io":true},
         {"description":"Work Break","io":false},
         {"description":"Return to Work","io":true},
         {"description":"Leave Work","io":false}

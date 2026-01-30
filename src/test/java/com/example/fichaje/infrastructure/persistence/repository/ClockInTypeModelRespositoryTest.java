@@ -22,7 +22,7 @@ class ClockInTypeModelRespositoryTest {
 
     @Container
     @ServiceConnection
-    static MongoDBContainer monngodb = new MongoDBContainer("mongo:8.0");
+    static MongoDBContainer mongodb = new MongoDBContainer("mongo:8.0");
 
     @Autowired
     ClockInTypeModelRespository clockInTypeModelRespository;
@@ -30,7 +30,7 @@ class ClockInTypeModelRespositoryTest {
     @BeforeEach
     void setup() {
         List<ClockInTypeModel> clockTypes = List.of(
-                ClockInTypeModel.builder().description("Enter to Work").io(true).build(),
+                ClockInTypeModel.builder().description("Start Work").io(true).build(),
                 ClockInTypeModel.builder().description("Work Break").io(false).build(),
                 ClockInTypeModel.builder().description("Return to Work").io(true).build(),
                 ClockInTypeModel.builder().description("Leave Work").io(false).build()
