@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ClockInRestAdapterIntegrationTest {
+class ClockInTypeRestAdapterIntegrationTest {
 
     @Container
     @ServiceConnection

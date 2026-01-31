@@ -28,9 +28,9 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 
-@WebMvcTest(ClockInRestAdapter.class)
+@WebMvcTest(ClockInTypeRestAdapter.class)
 @ExtendWith(MockitoExtension.class)
-class ClockInRestAdapterTest {
+class ClockInTypeRestAdapterTest {
 
     @Autowired
     private MockMvc mockMvc;

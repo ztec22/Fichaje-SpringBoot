@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/clockin")
+@RequestMapping("/api/v1/clockin/types")
 @RequiredArgsConstructor
-public class ClockInRestAdapter {
+public class ClockInTypeRestAdapter {
 
     private final ClockInServicePort clockInServicePort;
     private final ClockInTypeRestMapper clockInTypeRestMapper;
 
-    @GetMapping("/types")
+    @GetMapping
     public ResponseEntity<List<ClockInTypeResponse>> getClockInTypes() {
 
         List<ClockInTypeResponse> types = clockInTypeRestMapper.toDtoList(
@@ -32,7 +32,7 @@ public class ClockInRestAdapter {
         return ResponseEntity.ok().body(types);
     }
 
-    @PostMapping("/types")
+    @PostMapping
     public ResponseEntity<ApiResponse> createClockInType(
             @RequestBody @Valid ClockInTypeRequest clockInTypeRequest
     ) {
@@ -47,7 +47,7 @@ public class ClockInRestAdapter {
         );
     }
 
-    @PutMapping("/types/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ApiResponse> updateClockInType(
             @PathVariable String id,
             @RequestBody @Valid ClockInTypeRequest clockInTypeRequest
@@ -65,7 +65,7 @@ public class ClockInRestAdapter {
     }
 
 
-    @DeleteMapping("/types/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse> deleteClockInType(
             @PathVariable String id
     ) {
