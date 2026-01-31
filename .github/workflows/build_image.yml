@@ -1,4 +1,4 @@
-name: Build and test spring boot app
+name: Build and publish spring boot app container image
 on:
   workflow_dispatch:
 
