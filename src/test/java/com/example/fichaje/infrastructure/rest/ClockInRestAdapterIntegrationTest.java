@@ -1,5 +1,7 @@
 package com.example.fichaje.infrastructure.rest;
 
+import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.persistence.repository.ClockInTypeModelRespository;
 import com.example.fichaje.infrastructure.rest.dto.common.ApiResponse;
 import com.example.fichaje.infrastructure.rest.dto.request.ClockInTypeRequest;
 import com.example.fichaje.infrastructure.rest.dto.response.ClockInTypeResponse;
@@ -33,7 +35,10 @@ class ClockInRestAdapterIntegrationTest {
     @Autowired
     private WebApplicationContext context;
 
-    RestTestClient client;
+    private RestTestClient client;
+
+    @Autowired
+    ClockInTypeModelRespository clockInTypeModelRespository;
 
     @BeforeEach
     public void setup(WebApplicationContext context) {
@@ -43,7 +48,7 @@ class ClockInRestAdapterIntegrationTest {
     @Test
     void createClockInType() {
         ClockInTypeRequest clockInTypeRequest = ClockInTypeRequest.builder()
-                .description("Start Work")
+                .description("New Entry")
                 .io(true)
                 .build();
 
@@ -77,14 +82,17 @@ class ClockInRestAdapterIntegrationTest {
 
     @Test
     void updateClockInType() {
-        String id = UUID.randomUUID().toString();
+
+        ClockInTypeModel clockInTypeModel = ClockInTypeModel.builder().description("Start Work").io(true).build();
+        clockInTypeModel = clockInTypeModelRespository.save(clockInTypeModel);
+
         ClockInTypeRequest clockInTypeRequest = ClockInTypeRequest.builder()
-                .description("New Entry")
-                .io(true)
+                .description("Modified")
+                .io(false)
                 .build();
 
         ApiResponse response = client.put()
-                .uri("/api/v1/clockin/types/" + id)
+                .uri("/api/v1/clockin/types/" + clockInTypeModel.getId())
                 .body(clockInTypeRequest)
                 .exchange()
                 .expectStatus().isOk()

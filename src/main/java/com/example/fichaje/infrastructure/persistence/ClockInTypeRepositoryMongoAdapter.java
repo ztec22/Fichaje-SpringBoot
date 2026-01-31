@@ -2,6 +2,7 @@ package com.example.fichaje.infrastructure.persistence;
 
 
 import com.example.fichaje.application.ports.output.ClockInRepositoryPort;
+import com.example.fichaje.domain.exceptions.ClockInTypeNotFoundException;
 import com.example.fichaje.domain.model.ClockInType;
 import com.example.fichaje.infrastructure.persistence.mapper.ClockInTypeRepositoryMapper;
 import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
@@ -36,7 +37,12 @@ public class ClockInTypeRepositoryMongoAdapter implements ClockInRepositoryPort 
 
     @Override
     public void updateClockInType(ClockInType clockInType) {
-        ClockInTypeModel clockInTypeModel = clockInTypeRepositoryMapper.toModel(clockInType);
+        ClockInTypeModel clockInTypeModel = clockInTypeModelRespository.findById(clockInType.getId())
+                .orElseThrow(ClockInTypeNotFoundException::new);
+
+        clockInTypeModel.setDescription(clockInType.getDescription());
+        clockInTypeModel.setIo(clockInType.isIo());
+
         clockInTypeModelRespository.save(clockInTypeModel);
     }
 

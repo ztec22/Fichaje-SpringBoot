@@ -27,16 +27,15 @@ class ClockInTypeModelRespositoryTest {
     @Autowired
     ClockInTypeModelRespository clockInTypeModelRespository;
 
+    private static final List<ClockInTypeModel> clockTypes = List.of(
+            ClockInTypeModel.builder().description("Start Work").io(true).build(),
+            ClockInTypeModel.builder().description("Work Break").io(false).build(),
+            ClockInTypeModel.builder().description("Return to Work").io(true).build(),
+            ClockInTypeModel.builder().description("Leave Work").io(false).build()
+    );
+
     @BeforeEach
     void setup() {
-        List<ClockInTypeModel> clockTypes = List.of(
-                ClockInTypeModel.builder().description("Start Work").io(true).build(),
-                ClockInTypeModel.builder().description("Work Break").io(false).build(),
-                ClockInTypeModel.builder().description("Return to Work").io(true).build(),
-                ClockInTypeModel.builder().description("Leave Work").io(false).build()
-        );
-
-
         clockInTypeModelRespository.saveAll(clockTypes);
     }
 
