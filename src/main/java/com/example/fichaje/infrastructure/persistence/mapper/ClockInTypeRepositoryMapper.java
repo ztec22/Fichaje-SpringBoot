@@ -10,4 +10,6 @@ import java.util.List;
 public interface ClockInTypeRepositoryMapper {
     ClockInType toDomain(ClockInTypeModel clockInTypeModel);
     List<ClockInType> toDomainList(List<ClockInTypeModel> clockInTypes);
+
+    ClockInTypeModel toModel(ClockInType clockInType);
 }

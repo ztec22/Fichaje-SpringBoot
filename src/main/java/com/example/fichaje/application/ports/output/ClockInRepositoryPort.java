@@ -7,4 +7,7 @@ import java.util.List;
 public interface ClockInRepositoryPort {
 
     List<ClockInType> findAllTypes();
+    void createClockInType(ClockInType clockInType);
+    void updateClockInType(ClockInType clockInType);
+    void deleteClockInType(String id);
 }

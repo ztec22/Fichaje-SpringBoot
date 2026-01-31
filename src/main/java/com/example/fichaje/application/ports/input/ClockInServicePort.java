@@ -7,4 +7,7 @@ import java.util.List;
 public interface ClockInServicePort {
 
     List<ClockInType> getClockInTypes();
+    void createClockInType(ClockInType clockInType);
+    void updateClockInType(ClockInType clockInType);
+    void deleteClockInType(String id);
 }

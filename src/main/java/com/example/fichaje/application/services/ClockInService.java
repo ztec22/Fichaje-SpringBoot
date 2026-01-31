@@ -18,4 +18,20 @@ public class ClockInService implements ClockInServicePort {
     public List<ClockInType> getClockInTypes() {
         return clockInTypeRepositoryMongoAdapter.findAllTypes();
     }
+
+    @Override
+    public void createClockInType(ClockInType clockInType) {
+        clockInTypeRepositoryMongoAdapter.createClockInType(clockInType);
+    }
+
+    @Override
+    public void updateClockInType(ClockInType clockInType) {
+        clockInTypeRepositoryMongoAdapter.updateClockInType(clockInType);
+    }
+
+    @Override
+    public void deleteClockInType(String id) {
+        clockInTypeRepositoryMongoAdapter.deleteClockInType(id);
+    }
+
 }

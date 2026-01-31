@@ -1,5 +1,7 @@
 package com.example.fichaje.infrastructure.rest;
 
+import com.example.fichaje.infrastructure.rest.dto.common.ApiResponse;
+import com.example.fichaje.infrastructure.rest.dto.request.ClockInTypeRequest;
 import com.example.fichaje.infrastructure.rest.dto.response.ClockInTypeResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,8 +16,10 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.mongodb.MongoDBContainer;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @Testcontainers
@@ -37,6 +41,26 @@ class ClockInRestAdapterIntegrationTest {
     }
 
     @Test
+    void createClockInType() {
+        ClockInTypeRequest clockInTypeRequest = ClockInTypeRequest.builder()
+                .description("Start Work")
+                .io(true)
+                .build();
+
+        ApiResponse response = client.post()
+                .uri("/api/v1/clockin/types")
+                .body(clockInTypeRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<ApiResponse>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(response);
+        assertNotNull(response.getMessage());
+    }
+
+    @Test
     void getClockInTypes() {
 
         List<ClockInTypeResponse> types = client.get()
@@ -49,5 +73,42 @@ class ClockInRestAdapterIntegrationTest {
 
         assertNotNull(types);
         assertEquals(0, types.size());
+    }
+
+    @Test
+    void updateClockInType() {
+        String id = UUID.randomUUID().toString();
+        ClockInTypeRequest clockInTypeRequest = ClockInTypeRequest.builder()
+                .description("New Entry")
+                .io(true)
+                .build();
+
+        ApiResponse response = client.put()
+                .uri("/api/v1/clockin/types/" + id)
+                .body(clockInTypeRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<ApiResponse>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(response);
+        assertNotNull(response.getMessage());
+    }
+
+    @Test
+    void deleteClockInType() {
+        String id = UUID.randomUUID().toString();
+
+        ApiResponse response = client.delete()
+                .uri("/api/v1/clockin/types/" + id)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<ApiResponse>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(response);
+        assertNotNull(response.getMessage());
     }
 }
