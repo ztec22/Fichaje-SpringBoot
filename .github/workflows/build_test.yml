@@ -3,8 +3,12 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - 'README.md'
+  workflow_call:
+
 jobs:
-  build:
+  build-test:
     runs-on: ubuntu-latest
     steps:
 
@@ -16,6 +20,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
+          cache: maven
 
       - name: Build app
         run: mvn clean install
