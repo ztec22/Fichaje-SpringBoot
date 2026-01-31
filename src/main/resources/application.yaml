@@ -3,5 +3,7 @@ server:
 spring:
   application:
     name: fichaje
+  config:
+    import: optional:file:.env[.properties]
   mongodb:
-    uri: mongodb://user:pass@localhost:27017/clockin_db
+    uri: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DB}
