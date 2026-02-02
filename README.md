@@ -1,7 +1,7 @@
 # Fichaje-SpringBoot
 
 ## Sobre el proyecto
-Es un proyecto simple con API RESTful para mostrar el uso de **MongoDB**, la **Arquitectura Hexagonal**,
+Es un proyecto de gestionar tipos de fichajes con API RESTful para mostrar el uso de **MongoDB**, la **Arquitectura Hexagonal**,
 tests de integración con **TestContainers**, la configuracion del entorno local con **Docker** compose, **Kubernetes** 
 y la integración continua CI/CD con **Github Actions**.
 
@@ -29,9 +29,9 @@ y la integración continua CI/CD con **Github Actions**.
 ClockInType: Tipos de fichajes de entrada y salida.
 ```
 {
-    "id": "string", 
-    "description": "string",
-    "io": "boolean" // entrada/salida
+    "id": "12342", 
+    "description": "Start Work",
+    "io": "true" // entrada/salida
 }
 ```
 ## Endpoints
