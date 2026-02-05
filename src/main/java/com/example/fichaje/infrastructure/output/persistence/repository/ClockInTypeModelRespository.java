@@ -1,6 +1,6 @@
-package com.example.fichaje.infrastructure.persistence.repository;
+package com.example.fichaje.infrastructure.output.persistence.repository;
 
-import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

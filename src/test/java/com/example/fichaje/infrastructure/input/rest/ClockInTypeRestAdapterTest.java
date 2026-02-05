@@ -1,12 +1,13 @@
-package com.example.fichaje.infrastructure.rest;
+package com.example.fichaje.infrastructure.input.rest;
 
 import com.example.fichaje.application.ports.input.ClockInServicePort;
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
 import com.example.fichaje.domain.model.ClockInType;
-import com.example.fichaje.infrastructure.rest.dto.common.ApiResponse;
-import com.example.fichaje.infrastructure.rest.dto.request.ClockInTypeRequest;
-import com.example.fichaje.infrastructure.rest.dto.response.ClockInTypeResponse;
-import com.example.fichaje.infrastructure.rest.mapper.ClockInTypeRestMapper;
+import com.example.fichaje.infrastructure.input.rest.ClockInTypeRestAdapter;
+import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
+import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
+import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInTypeResponse;
+import com.example.fichaje.infrastructure.input.rest.mapper.ClockInTypeRestMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

@@ -1,12 +1,12 @@
-package com.example.fichaje.infrastructure.persistence;
+package com.example.fichaje.infrastructure.output.persistence;
 
 
 import com.example.fichaje.application.ports.output.ClockInRepositoryPort;
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
 import com.example.fichaje.domain.model.ClockInType;
-import com.example.fichaje.infrastructure.persistence.mapper.ClockInTypeRepositoryMapper;
-import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
-import com.example.fichaje.infrastructure.persistence.repository.ClockInTypeModelRespository;
+import com.example.fichaje.infrastructure.output.persistence.mapper.ClockInTypeRepositoryMapper;
+import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.repository.ClockInTypeModelRespository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

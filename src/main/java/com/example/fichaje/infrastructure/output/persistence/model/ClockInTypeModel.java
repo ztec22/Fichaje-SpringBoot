@@ -1,4 +1,4 @@
-package com.example.fichaje.infrastructure.persistence.model;
+package com.example.fichaje.infrastructure.output.persistence.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

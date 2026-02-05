@@ -1,4 +1,4 @@
-package com.example.fichaje.infrastructure.rest.dto.request;
+package com.example.fichaje.infrastructure.input.rest.dto.request;
 
 
 import jakarta.validation.constraints.NotBlank;

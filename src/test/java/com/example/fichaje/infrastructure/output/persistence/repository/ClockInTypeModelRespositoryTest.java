@@ -1,6 +1,7 @@
-package com.example.fichaje.infrastructure.persistence.repository;
+package com.example.fichaje.infrastructure.output.persistence.repository;
 
-import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.repository.ClockInTypeModelRespository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

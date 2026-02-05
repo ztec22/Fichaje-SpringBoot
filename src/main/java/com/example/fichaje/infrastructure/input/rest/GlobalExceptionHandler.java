@@ -1,8 +1,8 @@
-package com.example.fichaje.infrastructure.rest;
+package com.example.fichaje.infrastructure.input.rest;
 
 
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
-import com.example.fichaje.infrastructure.rest.dto.common.ErrorResponse;
+import com.example.fichaje.infrastructure.input.rest.dto.common.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

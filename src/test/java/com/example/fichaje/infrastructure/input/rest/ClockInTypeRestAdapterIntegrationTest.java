@@ -1,10 +1,10 @@
-package com.example.fichaje.infrastructure.rest;
+package com.example.fichaje.infrastructure.input.rest;
 
-import com.example.fichaje.infrastructure.persistence.model.ClockInTypeModel;
-import com.example.fichaje.infrastructure.persistence.repository.ClockInTypeModelRespository;
-import com.example.fichaje.infrastructure.rest.dto.common.ApiResponse;
-import com.example.fichaje.infrastructure.rest.dto.request.ClockInTypeRequest;
-import com.example.fichaje.infrastructure.rest.dto.response.ClockInTypeResponse;
+import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.repository.ClockInTypeModelRespository;
+import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
+import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
+import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInTypeResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.example.fichaje.infrastructure.rest.dto.response;
+package com.example.fichaje.infrastructure.input.rest.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

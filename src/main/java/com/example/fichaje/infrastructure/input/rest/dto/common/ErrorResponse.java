@@ -1,4 +1,4 @@
-package com.example.fichaje.infrastructure.rest.dto.common;
+package com.example.fichaje.infrastructure.input.rest.dto.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,7 +2,7 @@ package com.example.fichaje.application.services;
 
 import com.example.fichaje.application.ports.input.ClockInServicePort;
 import com.example.fichaje.domain.model.ClockInType;
-import com.example.fichaje.infrastructure.persistence.ClockInTypeRepositoryMongoAdapter;
+import com.example.fichaje.infrastructure.output.persistence.ClockInTypeRepositoryMongoAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
