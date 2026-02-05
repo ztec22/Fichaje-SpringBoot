@@ -1,4 +1,4 @@
-package com.example.fichaje.domain.exceptions;
+package com.example.fichaje.application.exceptions;
 
 public class ClockInTypeNotFoundException extends RuntimeException {
     public ClockInTypeNotFoundException() {

@@ -1,7 +1,7 @@
 package com.example.fichaje.infrastructure.rest;
 
 
-import com.example.fichaje.domain.exceptions.ClockInTypeNotFoundException;
+import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
 import com.example.fichaje.infrastructure.rest.dto.common.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
