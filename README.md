@@ -20,9 +20,24 @@ y la integración continua CI/CD con **Github Actions**.
 
 ## Arquitectura Hexagonal
 
-- application
-- domain
-- infrastructure
+```
+ application/
+   ├── ports/
+   │   ├── input/
+   │   └── output/
+   ├── services/          
+   └── exceptions/
+
+domain/
+   ├── model/      
+   └── exceptions/
+   
+infrastructure/
+  ├── input/           
+  │   └── rest/
+  └── output/           
+      └── persistence/
+```
 
 ## Modelos
 
