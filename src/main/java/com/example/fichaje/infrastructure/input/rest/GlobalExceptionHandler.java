@@ -2,6 +2,7 @@ package com.example.fichaje.infrastructure.input.rest;
 
 
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
+import com.example.fichaje.domain.exceptions.InvalidDeviceException;
 import com.example.fichaje.infrastructure.input.rest.dto.common.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,5 +32,14 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(body);
+    }
+
+    @ExceptionHandler(InvalidDeviceException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidDeviceException(InvalidDeviceException ex){
+        ErrorResponse body = ErrorResponse.builder()
+                .error(ex.getMessage())
+                .build();
+
+        return ResponseEntity.badRequest().body(body);
     }
 }

@@ -3,10 +3,10 @@ package com.example.fichaje.infrastructure.input.rest;
 import com.example.fichaje.application.ports.input.ClockInServicePort;
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
 import com.example.fichaje.domain.model.ClockInType;
-import com.example.fichaje.infrastructure.input.rest.ClockInTypeRestAdapter;
 import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
 import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
 import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInTypeResponse;
+import com.example.fichaje.infrastructure.input.rest.mapper.ClockInEntryRestMapper;
 import com.example.fichaje.infrastructure.input.rest.mapper.ClockInTypeRestMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,9 +29,9 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 
-@WebMvcTest(ClockInTypeRestAdapter.class)
+@WebMvcTest(ClockInRestAdapter.class)
 @ExtendWith(MockitoExtension.class)
-class ClockInTypeRestAdapterTest {
+class ClockInRestAdapterTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -41,7 +41,8 @@ class ClockInTypeRestAdapterTest {
 
     @MockitoBean
     private ClockInTypeRestMapper clockInTypeRestMapper;
-
+    @MockitoBean
+    private ClockInEntryRestMapper clockInEntryRestMapper;
 
     private static final List<ClockInTypeResponse> clockTypes = List.of(
             ClockInTypeResponse.builder().id(UUID.randomUUID().toString()).description("Start Work").io(true).build(),

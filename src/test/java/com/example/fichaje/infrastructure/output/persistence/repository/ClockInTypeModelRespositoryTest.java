@@ -28,6 +28,9 @@ class ClockInTypeModelRespositoryTest {
     @Autowired
     ClockInTypeModelRespository clockInTypeModelRespository;
 
+    @Autowired
+    ClockInEntryModelRespository clockInEntryModelRespository;
+
     private static final List<ClockInTypeModel> clockTypes = List.of(
             ClockInTypeModel.builder().description("Start Work").io(true).build(),
             ClockInTypeModel.builder().description("Work Break").io(false).build(),

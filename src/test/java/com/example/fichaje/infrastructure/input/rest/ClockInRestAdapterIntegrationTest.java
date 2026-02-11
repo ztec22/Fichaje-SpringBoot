@@ -1,6 +1,7 @@
 package com.example.fichaje.infrastructure.input.rest;
 
 import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
+import com.example.fichaje.infrastructure.output.persistence.repository.ClockInEntryModelRespository;
 import com.example.fichaje.infrastructure.output.persistence.repository.ClockInTypeModelRespository;
 import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
 import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
@@ -26,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class ClockInTypeRestAdapterIntegrationTest {
+class ClockInRestAdapterIntegrationTest {
 
     @Container
     @ServiceConnection
@@ -39,6 +40,9 @@ class ClockInTypeRestAdapterIntegrationTest {
 
     @Autowired
     ClockInTypeModelRespository clockInTypeModelRespository;
+
+    @Autowired
+    ClockInEntryModelRespository clockInEntryModelRespository;
 
     @BeforeEach
     public void setup(WebApplicationContext context) {

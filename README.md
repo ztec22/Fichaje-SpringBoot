@@ -21,16 +21,16 @@ y la integración continua CI/CD con **Github Actions**.
 ## Arquitectura Hexagonal
 
 ```
- application/
-   ├── ports/
-   │   ├── input/
-   │   └── output/
-   ├── services/          
-   └── exceptions/
+application/
+  ├── ports/
+  │   ├── input/
+  │   └── output/
+  ├── services/          
+  └── exceptions/
 
 domain/
-   ├── model/      
-   └── exceptions/
+  ├── model/      
+  └── exceptions/
    
 infrastructure/
   ├── input/           
@@ -41,14 +41,27 @@ infrastructure/
 
 ## Modelos
 
-ClockInType: Tipos de fichajes de entrada y salida.
+**ClockInType**: Tipos de fichajes de entrada y salida.
 ```
 {
-    "id": "12342", 
+    "id": "string", 
     "description": "Start Work",
     "io": "true" // entrada/salida
 }
 ```
+
+**ClockInEntryModel**: Registro de fichaje.
+```
+{
+    "id": "string", 
+    "clockInType": "string",
+    "date": "string",
+    "time": "string",
+    "device": "string",
+    "comment": "string"
+}
+```
+
 ## Endpoints
 
 | Metodo | Endpoint                     |
