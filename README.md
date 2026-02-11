@@ -64,6 +64,13 @@ infrastructure/
 
 ## Endpoints
 
+### Gestionar fichajes 
+| Metodo | Endpoint              |
+|-------:|-----------------------|
+|    GET | `/api/v1/clockin`     |
+|   POST | `/api/v1/clockin`     |
+
+### Gestionar tipos de fichajes
 | Metodo | Endpoint                     |
 |-------:|------------------------------|
 |    GET | `/api/v1/clockin/types/`     |
