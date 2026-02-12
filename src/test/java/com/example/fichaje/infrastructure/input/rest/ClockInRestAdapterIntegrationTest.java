@@ -1,11 +1,15 @@
 package com.example.fichaje.infrastructure.input.rest;
 
+import com.example.fichaje.domain.enums.DeviceEnum;
+import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInEntryRequest;
+import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInEntryResponse;
 import com.example.fichaje.infrastructure.output.persistence.model.ClockInTypeModel;
 import com.example.fichaje.infrastructure.output.persistence.repository.ClockInEntryModelRespository;
 import com.example.fichaje.infrastructure.output.persistence.repository.ClockInTypeModelRespository;
 import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
 import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
 import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInTypeResponse;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +23,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.mongodb.MongoDBContainer;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -44,9 +47,62 @@ class ClockInRestAdapterIntegrationTest {
     @Autowired
     ClockInEntryModelRespository clockInEntryModelRespository;
 
+    private static final List<ClockInTypeModel> clockTypes = List.of(
+            ClockInTypeModel.builder().id(new ObjectId().toHexString()).description("Start Work").io(true).build(),
+            ClockInTypeModel.builder().id(new ObjectId().toHexString()).description("Work Break").io(false).build(),
+            ClockInTypeModel.builder().id(new ObjectId().toHexString()).description("Return to Work").io(true).build(),
+            ClockInTypeModel.builder().id(new ObjectId().toHexString()).description("Leave Work").io(false).build()
+    );
+
     @BeforeEach
     public void setup(WebApplicationContext context) {
         client = RestTestClient.bindToApplicationContext(context).build();
+        clockInTypeModelRespository.saveAll(clockTypes);
+    }
+
+    @Test
+    void createClockInEntryAndRetriveAllClockInEntries() {
+        //createClockInEntry
+        ClockInEntryRequest clockInEntryRequest = ClockInEntryRequest.builder()
+                .clockInType(clockTypes.getFirst().getId())
+                .device(DeviceEnum.PC.toString())
+                .build();
+
+        ApiResponse createResponse = client.post()
+                .uri("/api/v1/clockin")
+                .body(clockInEntryRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<ApiResponse>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(createResponse);
+        assertNotNull(createResponse.getMessage());
+
+        //retriveAllClockInEntries
+        List<ClockInEntryResponse> entries = client.get()
+                .uri("/api/v1/clockin")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<ClockInEntryResponse>>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(entries);
+        assertEquals(1, entries.size());
+
+        ClockInEntryResponse entry = entries.getFirst();
+        assertNotNull(entry);
+        assertNotNull(entry.getId());
+
+        assertNotNull(entry.getClockInType());
+        assertNotNull(entry.getClockInType().getId());
+        assertNotNull(entry.getClockInType().getDescription());
+
+        assertNotNull(entry.getDate());
+        assertNotNull(entry.getTime());
+        assertNotNull(entry.getDevice());
     }
 
     @Test
@@ -81,7 +137,7 @@ class ClockInRestAdapterIntegrationTest {
                 .getResponseBody();
 
         assertNotNull(types);
-        assertEquals(0, types.size());
+        assertEquals(4, types.size());
     }
 
     @Test
@@ -110,7 +166,7 @@ class ClockInRestAdapterIntegrationTest {
 
     @Test
     void deleteClockInType() {
-        String id = UUID.randomUUID().toString();
+        String id = new ObjectId().toHexString();
 
         ApiResponse response = client.delete()
                 .uri("/api/v1/clockin/types/" + id)

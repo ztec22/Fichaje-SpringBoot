@@ -39,7 +39,6 @@ public class ClockInService implements ClockInServicePort {
 
     @Override
     public void createClockInEntry(ClockInEntry clockInEntry) {
-        //TODO
 
         ClockInType clockInType = clockInRepositoryMongoAdapter.findClockInTypeById(clockInEntry.getClockInType().getId());
 

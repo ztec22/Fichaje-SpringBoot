@@ -2,9 +2,12 @@ package com.example.fichaje.infrastructure.input.rest;
 
 import com.example.fichaje.application.ports.input.ClockInServicePort;
 import com.example.fichaje.application.exceptions.ClockInTypeNotFoundException;
+import com.example.fichaje.domain.enums.DeviceEnum;
 import com.example.fichaje.domain.model.ClockInType;
 import com.example.fichaje.infrastructure.input.rest.dto.common.ApiResponse;
+import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInEntryRequest;
 import com.example.fichaje.infrastructure.input.rest.dto.request.ClockInTypeRequest;
+import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInEntryResponse;
 import com.example.fichaje.infrastructure.input.rest.dto.response.ClockInTypeResponse;
 import com.example.fichaje.infrastructure.input.rest.mapper.ClockInEntryRestMapper;
 import com.example.fichaje.infrastructure.input.rest.mapper.ClockInTypeRestMapper;
@@ -50,6 +53,61 @@ class ClockInRestAdapterTest {
             ClockInTypeResponse.builder().id(UUID.randomUUID().toString()).description("Return to Work").io(true).build(),
             ClockInTypeResponse.builder().id(UUID.randomUUID().toString()).description("Leave Work").io(false).build()
     );
+
+    @Test
+    void getClockInEntries_Ok() {
+
+        when(clockInEntryRestMapper.toDtoList(anyList())).thenReturn(List.of());
+
+        RestTestClient client = RestTestClient.bindTo(mockMvc).build();
+
+        List<ClockInEntryResponse> entries = client.get()
+                .uri("/api/v1/clockin")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<List<ClockInEntryResponse>>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(entries);
+        assertEquals(0, entries.size());
+    }
+
+    @Test
+    void createClockInEntry_Ok() {
+        ClockInEntryRequest clockInEntryRequest = ClockInEntryRequest.builder()
+                .clockInType(clockTypes.getFirst().getId())
+                .device(DeviceEnum.PC.toString())
+                .build();
+
+        RestTestClient client = RestTestClient.bindTo(mockMvc).build();
+
+        ApiResponse response = client.post()
+                .uri("/api/v1/clockin")
+                .body(clockInEntryRequest)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(new ParameterizedTypeReference<ApiResponse>() {})
+                .returnResult()
+                .getResponseBody();
+
+        assertNotNull(response);
+        assertNotNull(response.getMessage());
+    }
+
+    @Test
+    void createClockEntry_BadRequest() {
+
+        RestTestClient client = RestTestClient.bindTo(mockMvc).build();
+
+        client.post()
+                .uri("/api/v1/clockin")
+                .body(new ClockInTypeRequest())
+                .exchange()
+                .expectStatus().isBadRequest()
+                .expectBody()
+                .jsonPath("$.error").exists();
+    }
 
     @Test
     void createClockInType_Ok() {

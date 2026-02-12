@@ -32,11 +32,11 @@ public class ClockInRestAdapter {
     @GetMapping
     public ResponseEntity<List<ClockInEntryResponse>> getClockInEntries() {
 
-        List<ClockInEntryResponse> types = clockInEntryRestMapper.toDtoList(
+        List<ClockInEntryResponse> entries = clockInEntryRestMapper.toDtoList(
                 clockInServicePort.getClockInEntries()
         );
 
-        return ResponseEntity.ok().body(types);
+        return ResponseEntity.ok().body(entries);
     }
 
     @PostMapping
