@@ -40,7 +40,7 @@ public class ClockInRestAdapter {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse> createClockInType(
+    public ResponseEntity<ApiResponse> createClockInEntry(
             @RequestBody @Valid ClockInEntryRequest clockInEntryRequest
     ) {
 

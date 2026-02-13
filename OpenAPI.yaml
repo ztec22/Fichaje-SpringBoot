@@ -1,15 +1,54 @@
-openapi: 3.1.0
+openapi: 3.0.4
 info:
   title: OpenAPI definition
-  version: v0
+  version: v1
 servers:
   - url: http://localhost:8082
     description: Local server url
+tags:
+  - name: clock-in-rest-adapter
 paths:
+  /api/v1/clockin:
+    get:
+      tags:
+        - clock-in-rest-adapter
+      operationId: getClockInEntries
+      responses:
+        "200":
+          description: Ok
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClockInEntryResponse"
+    post:
+      tags:
+        - clock-in-rest-adapter
+      operationId: createClockInEntry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ClockInEntryRequest"
+        required: true
+      responses:
+        "200":
+          description: Ok
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ApiResponse"
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /api/v1/clockin/types/{id}:
     put:
       tags:
-        - clock-in-type-rest-adapter
+        - clock-in-rest-adapter
       operationId: updateClockInType
       parameters:
         - name: id
@@ -44,7 +83,7 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
     delete:
       tags:
-        - clock-in-type-rest-adapter
+        - clock-in-rest-adapter
       operationId: deleteClockInType
       parameters:
         - name: id
@@ -62,7 +101,7 @@ paths:
   /api/v1/clockin/types:
     get:
       tags:
-        - clock-in-type-rest-adapter
+        - clock-in-rest-adapter
       operationId: getClockInTypes
       responses:
         "200":
@@ -75,7 +114,7 @@ paths:
                   $ref: "#/components/schemas/ClockInTypeResponse"
     post:
       tags:
-        - clock-in-type-rest-adapter
+        - clock-in-rest-adapter
       operationId: createClockInType
       requestBody:
         content:
@@ -98,6 +137,36 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
+    ClockInEntryRequest:
+      type: object
+      properties:
+        clockInType:
+          type: string
+          minLength: 1
+        device:
+          type: string
+          minLength: 1
+        comment:
+          type: string
+      required:
+        - clockInType
+        - device
+    ClockInEntryResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        clockInType:
+          $ref: "#/components/schemas/ClockInTypeResponse"
+        date:
+          type: string
+          format: date
+        time:
+          type: string
+        device:
+          type: string
+        comment:
+          type: string
     ClockInTypeRequest:
       type: object
       properties:
@@ -109,6 +178,15 @@ components:
       required:
         - description
         - io
+    ClockInTypeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        description:
+          type: string
+        io:
+          type: boolean
     ApiResponse:
       type: object
       properties:
@@ -119,12 +197,3 @@ components:
       properties:
         error:
           type: string
-    ClockInTypeResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        description:
-          type: string
-        io:
-          type: boolean
